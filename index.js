@@ -53,7 +53,7 @@ function showTemp(response) {
   sanitise(precipitationElement);
   function sanitise(precipitationElement) {
     if (isNaN(precipitationElement)) {
-      return `0`;
+      return (precipitationElement.innerHTML = `0`);
     }
     return (precipitationElement.innerHTML = Math.round(response.data));
   }
