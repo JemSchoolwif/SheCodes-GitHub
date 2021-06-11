@@ -29,19 +29,39 @@ today.innerHTML = formatDate(now);
 // 🕵️‍♀️Feature #2 - Add a search engine, when searching for a city (i.e. Paris), display the city name on the page after the user submits the form. //
 
 function showTemp(response) {
-  document.querySelector("#cityLocation").innerHTML = response.data.name;
-  document.querySelector("#todayTemp").innerHTML = Math.round(
-    response.data.main.temp
+  let icon = response.data.weather[0].icon;
+  let iconElement = document.querySelector("#todayIcon");
+  let windElement = document.querySelector("#Wind");
+  let humidityElement = document.querySelector("#Humidity");
+  let cityElement = document.querySelector("#cityLocation");
+  let temperatureElement = document.querySelector("#todayTemp");
+  let descriptionElement = document.querySelector("#Description");
+  let precipitationElement = document.querySelector("#precipitation");
+
+  celsiusTemperature = response.data.main.temp;
+
+  cityElement.innerHTML = response.data.name;
+  temperatureElement.innerHTML = Math.round(response.data.main.temp);
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${icon}@2x.png`
   );
-  document.querySelector("#Humidity").innerHTML = response.data.main.humidity;
-  document.querySelector("#Wind").innerHTML = Math.round(
-    response.data.wind.speed
-  );
+  descriptionElement.innerHTML = response.data.weather[0].description;
+  humidityElement.innerHTML = response.data.main.humidity;
+  windElement.innerHTML = Math.round(response.data.wind.speed);
+  precipitationElement.innerHTML = Math.round(response.data);
+  sanitise(precipitationElement);
+  function sanitise(precipitationElement) {
+    if (isNaN(precipitationElement)) {
+      return `0`;
+    }
+    return (precipitationElement.innerHTML = Math.round(response.data));
+  }
 }
 
 function searchCity(city) {
   let apiKey = "67a5bb6ae9cb9e8aa9167aebe0cc2511";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showTemp);
 }
 
@@ -64,19 +84,25 @@ function getCurrentLocation(event) {
 
 function celsiusTemp(event) {
   event.preventDefault();
+  tempCelsius.classList.add("active");
   let temperatureNow = document.querySelector("#todayTemp");
-  temperatureNow.innerHTML = `30°C /12°C`;
+  temperatureNow.innerHTML = Math.round(celsiusTemperature);
 }
 function farenheitTemp(event) {
   event.preventDefault();
+  tempFarenheit.classList.add("active");
+  tempCelsius.classList.remove("active");
   let temperatureNow = document.querySelector("#todayTemp");
-  temperatureNow.innerHTML = `86°F /54°F`;
+  let FahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureNow.innerHTML = Math.round(FahrenheitTemperature);
 }
 
-let tempCelsius = document.querySelector("#Fahrenheit");
-tempCelsius.addEventListener("click", farenheitTemp);
-let tempFarenheit = document.querySelector("#Celsius");
-tempFarenheit.addEventListener("click", celsiusTemp);
+let celsiusTemperature = null;
+
+let tempFarenheit = document.querySelector("#Fahrenheit");
+tempFarenheit.addEventListener("click", farenheitTemp);
+let tempCelsius = document.querySelector("#Celsius");
+tempCelsius.addEventListener("click", celsiusTemp);
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSubmit);
@@ -84,4 +110,4 @@ searchForm.addEventListener("submit", handleSubmit);
 let currentLocationButton = document.querySelector("#currentLocation");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
-searchCity("Paris");
+searchCity("London");

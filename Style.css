@@ -7,9 +7,14 @@ header {
   width: 100%;
   padding: 5%;
 }
-.button-addon2 {
+.btn-outline-secondary {
   background-color: #11cbd7;
+  color: white;
 }
+.AddWeatherinfo {
+  text-transform: capitalize;
+}
+
 .search {
   margin: 0 auto;
   align-items: center;
@@ -49,18 +54,16 @@ header {
   padding: 0;
   border: 0;
 }
-.hover .btn-success {
-  background-color: #f60c86;
+.btn-success:hover {
+  background-color: #6c757d;
 }
-.city-sun {
-  font-size: 100px;
-  display: inline;
+#todayIcon {
+  size: 100px;
+  display: block;
+  float: right;
   margin: 0;
   position: relative;
-  float: right;
   border: 1px;
-  color: yellow;
-  text-align: center;
   padding: 0;
   border: 1px;
 }
@@ -74,13 +77,35 @@ header {
   color: #11cbd7;
   border: #11cbd7 4px solid;
 }
+.celsius {
+  font-size: 15px;
+  text-decoration: none;
+
+  color: #11cbd7;
+}
+.active {
+  font-size: 25px;
+  text-decoration: none;
+  color: #11cbd7;
+}
+#Fahrenheit {
+  font-size: 15px;
+  text-decoration: none;
+
+  color: #11cbd7;
+}
+#Celsius:hover {
+  color: #f60c86;
+}
+#Fahrenheit:hover {
+  color: #f60c86;
+}
+
 .CF {
-  font-size: 5px;
-  top: -20px;
+  color: #11cbd7;
+  font-size: 15px;
 }
-a {
-  font-size: 12px;
-}
+
 .AddWeatherinfo {
   font-size: 15px;
   padding: 0;
@@ -126,8 +151,19 @@ footer {
 .coded {
   color: #fff6a2;
   font-weight: bold;
+  text-decoration: none;
 }
 .name {
+  color: #11cbd7;
+  font-weight: bolder;
+  text-decoration: none;
+}
+.coded:hover {
+  color: #fff6a2;
+  font-weight: bold;
+  text-decoration: none;
+}
+.name:hover {
   color: #11cbd7;
   font-weight: bolder;
   text-decoration: none;
