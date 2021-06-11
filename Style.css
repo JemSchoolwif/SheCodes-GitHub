@@ -161,10 +161,10 @@ footer {
 .coded:hover {
   color: #fff6a2;
   font-weight: bold;
-  text-decoration: none;
+  text-decoration: underline;
 }
 .name:hover {
   color: #11cbd7;
   font-weight: bolder;
-  text-decoration: none;
+  text-decoration: underline;
 }
