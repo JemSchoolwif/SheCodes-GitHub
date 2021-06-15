@@ -111,37 +111,25 @@ header {
   padding: 0;
   margin: 0;
 }
-.predictions {
-  align-content: center;
+div.row {
   width: 100%;
-  padding: 0;
-  color: #11cbd7;
 }
-.future-weather {
-  text-align: center;
+div#forecast.col-2 {
+  color: #11cbd7;
   font-size: 20px;
   top: 20px;
-  align-items: center;
-  align-content: center;
-  width: auto;
-  border: #11cbd7 4px solid;
-  color: #11cbd7;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
 }
-.emojis {
-  padding: 10px 25px;
+div.col-2 {
+  color: #11cbd7;
   font-size: 20px;
-  position: relative;
+  top: 20px;
+  padding: 20px 20px;
+  width: 50px;
 }
 
-.fa-cloud-rain {
-  color: #2552ac;
-}
-.fa-cloud {
-  color: grey;
-}
-.fa-sun {
-  color: yellow;
-}
 footer {
   text-align: center;
   position: absolute;

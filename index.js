@@ -22,6 +22,36 @@ function formatDate(date) {
   return `${day} ${hour}:${min}`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days = ["Thu", "Fri","Sat", "Sun", "Mon"];
+days.forEach(function(day){
+forecastHTML =
+    forecastHTML +
+    `
+    <div class="col-2">
+   <div class="weather-forecast-date">${day}</div>
+    <img
+    src="http://openweather.org/img/wn/50d@2x.png" alt="" />
+    <div class="weather-forecast-temp"><span class ="weather-forecast-temp-max">11°C </span><span class="weather-forecast-temp-min">5°C</span></div>
+    </div>
+    `;
+  forecastHTML =
+    forecastHTML +
+    ` 
+    <div class="col-2">
+   <div class="weather-forecast-date">${day}</div>
+    <img
+    src="http://openweather.org/img/wn/50d@2x.png" alt="" />
+    <div class="weather-forecast-temp"><span class ="weather-forecast-temp-max">11°C </span><span class="weather-forecast-temp-min">5°C</span></div>
+    </div>
+   `;
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+})
+
 let today = document.querySelector("#date");
 let now = new Date();
 today.innerHTML = formatDate(now);
@@ -111,3 +141,4 @@ let currentLocationButton = document.querySelector("#currentLocation");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
 searchCity("London");
+displayForecast();
