@@ -22,7 +22,7 @@ function formatDate(date) {
   return `${day} ${hour}:${min}`;
 }
 
-function displayForecast() {
+function displayForecast(repsonse) {
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
@@ -47,6 +47,12 @@ let now = new Date();
 today.innerHTML = formatDate(now);
 
 // 🕵️‍♀️Feature #2 - Add a search engine, when searching for a city (i.e. Paris), display the city name on the page after the user submits the form. //
+
+function getForecast(coordinates) {
+  let apiKey = "67a5bb6ae9cb9e8aa9167aebe0cc2511";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude={part}&appid=${apikey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
 
 function showTemp(response) {
   let icon = response.data.weather[0].icon;
@@ -77,6 +83,7 @@ function showTemp(response) {
     }
     return (precipitationElement.innerHTML = Math.round(response.data));
   }
+  getForecast(response.data.coord);
 }
 
 function searchCity(city) {
@@ -131,4 +138,3 @@ let currentLocationButton = document.querySelector("#currentLocation");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
 searchCity("London");
-displayForecast();
