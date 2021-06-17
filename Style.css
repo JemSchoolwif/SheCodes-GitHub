@@ -113,6 +113,7 @@ header {
 }
 div.row.predictions {
   width: 100%;
+  min-height: fit-content;
 }
 
 div#forecast.col-2 {
@@ -136,12 +137,11 @@ div.col-2 {
 
 footer {
   text-align: center;
-  position: absolute;
+  position: fixed 0;
   bottom: 0;
-  padding: 50px 55px;
+  padding: 50px 0px;
   background-color: #f60c86;
-  width: auto;
-  right: -10px;
+  width: 100%;
 }
 .coded {
   color: #fff6a2;
