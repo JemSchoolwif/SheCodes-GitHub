@@ -111,9 +111,10 @@ header {
   padding: 0;
   margin: 0;
 }
-div.row {
+div.row.predictions {
   width: 100%;
 }
+
 div#forecast.col-2 {
   color: #11cbd7;
   font-size: 20px;
@@ -128,6 +129,9 @@ div.col-2 {
   top: 20px;
   padding: 20px 20px;
   width: 100px;
+  margin-right: 20px;
+  margin-left: 70px;
+  column-gap: auto;
 }
 
 footer {
