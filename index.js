@@ -22,6 +22,10 @@ function formatDate(date) {
   return `${day} ${hour}:${min}`;
 }
 
+let today = document.querySelector("#date");
+let now = new Date();
+today.innerHTML = formatDate(now);
+
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
@@ -32,6 +36,7 @@ function formatDay(timestamp) {
 
 function displayForecast(response) {
   let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
@@ -47,12 +52,18 @@ function displayForecast(response) {
     <img
     src="http://openweathermap.org/img/wn/${
       forecastDay.weather[0].icon
-    }@2x.png" alt="" />
-    <div class="weather-forecast-temp"><span class ="weather-forecast-temp-max">${Math.round(
-      forecastDay.dt.temp.max
-    )}°C / </span><span class="weather-forecast-temp-min">${Math.round(
-          forecastDay.dt.temp.min
-        )}°C</span></div>
+    }@2x.png" 
+    alt="" 
+    width="42"
+    />
+    <div class="weather-forecast-temp">
+    <span class ="weather-forecast-temp-max"> ${Math.round(
+      forecastDay.temp.max
+    )}°C / </span>
+    <span class="weather-forecast-temp-min"> ${Math.round(
+      forecastDay.temp.min
+    )}°C</span>
+        </div>
     </div>
     `;
     }
@@ -62,26 +73,21 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 
-let today = document.querySelector("#date");
-let now = new Date();
-today.innerHTML = formatDate(now);
-
-// 🕵️‍♀️Feature #2 - Add a search engine, when searching for a city (i.e. Paris), display the city name on the page after the user submits the form. //
-
 function getForecast(coordinates) {
+  console.log(coordinates);
   let apiKey = "67a5bb6ae9cb9e8aa9167aebe0cc2511";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude={part}&appid=${apikey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apikey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
 
 function showTemp(response) {
   let icon = response.data.weather[0].icon;
-  let iconElement = document.querySelector("#todayIcon");
-  let windElement = document.querySelector("#Wind");
-  let humidityElement = document.querySelector("#Humidity");
-  let cityElement = document.querySelector("#cityLocation");
   let temperatureElement = document.querySelector("#todayTemp");
+  let cityElement = document.querySelector("#cityLocation");
   let descriptionElement = document.querySelector("#Description");
+  let humidityElement = document.querySelector("#Humidity");
+  let windElement = document.querySelector("#Wind");
+  let iconElement = document.querySelector("#todayIcon");
   let precipitationElement = document.querySelector("#precipitation");
 
   celsiusTemperature = response.data.main.temp;
