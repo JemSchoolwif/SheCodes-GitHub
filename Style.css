@@ -159,3 +159,9 @@ footer {
   font-weight: bolder;
   text-decoration: underline;
 }
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: rgb(124, 100, 139);
+}
