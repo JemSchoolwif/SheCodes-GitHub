@@ -22,26 +22,46 @@ function formatDate(date) {
   return `${day} ${hour}:${min}`;
 }
 
-function displayForecast(repsonse) {
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
     <div class="col-2">
-   <div class="weather-forecast-date">${day}</div>
+   <div class="weather-forecast-date">${formatDate(forecastDay.dt)}</div>
+ 
     <img
-    src="http://openweather.org/img/wn/50d@2x.png" alt="" />
-    <div class="weather-forecast-temp"><span class ="weather-forecast-temp-max">11°C </span><span class="weather-forecast-temp-min">5°C</span></div>
+    src="http://openweathermap.org/img/wn/${
+      forecastDay.weather[0].icon
+    }@2x.png" alt="" />
+    <div class="weather-forecast-temp"><span class ="weather-forecast-temp-max">${Math.round(
+      forecastDay.dt.temp.max
+    )}°C / </span><span class="weather-forecast-temp-min">${Math.round(
+          forecastDay.dt.temp.min
+        )}°C</span></div>
     </div>
     `;
-    forecastHTML = forecastHTML + `</div>`;
-    forecastElement.innerHTML = forecastHTML;
+    }
   });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
+
 let today = document.querySelector("#date");
 let now = new Date();
 today.innerHTML = formatDate(now);
@@ -80,8 +100,9 @@ function showTemp(response) {
   function sanitise(precipitationElement) {
     if (isNaN(precipitationElement)) {
       return (precipitationElement.innerHTML = `0`);
+    } else {
+      return (precipitationElement.innerHTML = Math.round(response.data));
     }
-    return (precipitationElement.innerHTML = Math.round(response.data));
   }
   getForecast(response.data.coord);
 }
