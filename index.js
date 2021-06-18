@@ -101,15 +101,7 @@ function showTemp(response) {
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);
-  precipitationElement.innerHTML = Math.round(response.data);
-  sanitise(precipitationElement);
-  function sanitise(precipitationElement) {
-    if (isNaN(precipitationElement)) {
-      return (precipitationElement.innerHTML = `0`);
-    } else {
-      return (precipitationElement.innerHTML = Math.round(response.data));
-    }
-  }
+
   getForecast(response.data.coord);
 }
 
